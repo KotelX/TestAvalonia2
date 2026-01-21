@@ -4,14 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="using:TestAvalonia2.ViewModels"
+             xmlns:dock="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              x:DataType="vm:MainWindowViewModel"
              x:Class="TestAvalonia2.Views.MainView">
+    
     <Design.DataContext>
-    <vm:MainWindowViewModel />
-  </Design.DataContext>
-    <Grid Background="Red">
-		 <DockControl x:Name="DockControl" Layout="{Binding Layout}" 
-                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="Blue" Padding="10">
-             </DockControl>
-    </Grid>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+    
+    <dock:DockControl Layout="{Binding Layout}" />
 </UserControl>

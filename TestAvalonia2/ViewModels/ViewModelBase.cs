@@ -2,7 +2,7 @@
 
 namespace TestAvalonia2.ViewModels
 {
-    public abstract class ViewModelBase : ObservableObject
+    public class ViewModelBase : ObservableObject
     {
     }
-}
+}   

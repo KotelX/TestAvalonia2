@@ -1,19 +1,19 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:controls="using:Dock.Model.Mvvm.Controls"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:TestAvalonia2.ViewModels"
+             xmlns:views="using:TestAvalonia2.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="using:TestAvalonia2.ViewModels.Documents"
-             
-            xmlns:views="using:TestAvalonia2.Views"
-             x:Class="TestAvalonia2.Document1View"
-             x:DataType="vm:DocumentViewModel">
-    <Grid Focusable="True">
+             x:DataType="vm:Tools.ToolViewModel"
+             x:Class="TestAvalonia2.Views.Tools.ToolView" x:CompileBindings="True">
+  <Grid Focusable="True">
     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
       <TextBlock Text="{Binding Id}" Padding="2" />
       <TextBlock Text="{Binding Title}" Padding="2" />
       <TextBlock Text="{Binding Context}" Padding="2" />
-      <TextBox Text="Document" />
+      <TextBox Text="Tool1" />
     </StackPanel>
   </Grid>
 </UserControl>

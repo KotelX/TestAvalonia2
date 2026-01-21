@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:TestAvalonia2.ViewModels.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TestAvalonia2.HomeView"
+             x:Class="TestAvalonia2.Views.Views.HomeView"
              x:DataType="vm:HomeViewModel">
   <Grid RowDefinitions="*,25">
     <ContentControl Content="{Binding ActiveDockable}" Margin="4" Grid.Row="0" />
