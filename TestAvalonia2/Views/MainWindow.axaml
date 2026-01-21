@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TestAvalonia2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+                     xmlns:dm="using:Dock.Model.Core"
+             xmlns:dmc="using:Dock.Model.Controls"
+        x:Class="TestAvalonia2.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        xmlns:views="using:TestAvalonia2.Views"
+        xmlns:docking="clr-namespace:YourApp.Docking"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="TestAvalonia2">
+    <Window.Resources>
+    <ExperimentalAcrylicMaterial BackgroundSource="Digger"
+                                 TintColor="{DynamicResource SystemAltHighColor}"
+                                 TintOpacity="1"
+                                 FallbackColor="{DynamicResource AcrylicFallbackColor}"
+                                 MaterialOpacity="0.55"
+                                 x:Key="AcrylicMaterial"/>
+  </Window.Resources>
+   <views:MainView />
+</Window>

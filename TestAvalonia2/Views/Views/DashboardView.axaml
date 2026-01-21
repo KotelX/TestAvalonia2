@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:idc="using:Dock.Model.Controls"
+             xmlns:vm="using:TestAvalonia2.ViewModels.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:DashboardViewModel" x:Class="TestAvalonia2.DashboardView">
+  <Grid>
+    <StackPanel>
+      <TextBlock Text="{Binding Id}" />
+      <TextBlock Text="{Binding Title}" />
+      <TextBlock Text="{Binding Context}" />
+      <Button DataContext="{Binding Context}"
+              Content="Home"
+              Command="{Binding Navigate}"
+              CommandParameter="Home"
+              HorizontalAlignment="Stretch"
+              HorizontalContentAlignment="Center"
+              x:DataType="idc:IRootDock" />
+    </StackPanel>
+  </Grid>
+</UserControl>
