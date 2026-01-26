@@ -3,9 +3,9 @@ using Avalonia.Markup.Xaml;
 
 namespace TestAvalonia2.Views.Tools;
 
-public partial class ToolView : UserControl
+public partial class ToolMenuView : UserControl
 {
-    public ToolView()
+    public ToolMenuView()
     {
         InitializeComponent();
     }

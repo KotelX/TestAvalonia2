@@ -3,10 +3,11 @@ using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.Mvvm;
 using Dock.Model.Mvvm.Controls;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using TestAvalonia2.Models.Documents;
+using TestAvalonia2.Models.Tools;
+using TestAvalonia2.Services;
 using TestAvalonia2.ViewModels.Docks;
 using TestAvalonia2.ViewModels.Documents;
 using TestAvalonia2.ViewModels.Tools;
@@ -15,19 +16,28 @@ namespace TestAvalonia2.ViewModels
 {
     public class DockFactory : Factory
     {
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IFileLogger _fileLogger;
         private IRootDock? _rootDock;
         private IDocumentDock? _documentDock;
 
+        public DockFactory()
+        {
+            _eventAggregator = new EventAggregator();
+            _fileLogger = new FileLogger();
+        }
+
         public override IRootDock CreateLayout()
         {
-            var document1 = new DocumentViewModel() { Id = "D1", Title = "Document1" };
+            var document1 = new ViewPicturesDocumentViewModel(_eventAggregator, _fileLogger) { Id = "D1", Title = "Document1" };
             var document2 = new DocumentViewModel() { Id = "D2", Title = "Document2" };
             var document3 = new DocumentViewModel() { Id = "D3", Title = "Document3" };
             var tool1 = new ToolViewModel() { Id = "T1", Title = "Tool1" };
             var tool2 = new ToolViewModel() { Id = "T2", Title = "Tool2" };
-            var tool3 = new ToolViewModel() { Id = "T3", Title = "Tool3" };
-            var tool4 = new ToolViewModel() { Id = "T4", Title = "Tool4" };
-            var documentDock = new CustomDocumentDock
+            var tool3 = new ToolHistoryViewModel(_eventAggregator, _fileLogger) { Id = "T3", Title = "Tool3" };
+            var tool4 = new ToolMenuViewModel(_eventAggregator) { Id = "T4", Title = "Tool4" };
+            var tool5 = new ToolViewModel() { Id = "T5", Title = "Tool5" };
+            var documentDock = new CustomDocumentDock(_eventAggregator, _fileLogger)
             {
                 Title = "Doc",
                 IsCollapsable = false,
@@ -41,18 +51,17 @@ namespace TestAvalonia2.ViewModels
             {
                 Id = "LeftTopTools",
                 Title = "Верх",
-                ActiveDockable = tool1,
-                VisibleDockables = CreateList<IDockable>(tool1),
+                ActiveDockable = tool4,
+                VisibleDockables = CreateList<IDockable>(tool4),
                 Alignment = Alignment.Left
             };
-
-            var leftBottomToolDock = new ToolDock
+            var rightTopToolDock = new ToolDock
             {
-                Id = "LeftBottomTools",
-                Title = "Низ",
-                ActiveDockable = tool2,
-                VisibleDockables = CreateList<IDockable>(tool2),
-                Alignment = Alignment.Left
+                Id = "RightTopTools",
+                Title = "Верх",
+                ActiveDockable = tool5,
+                VisibleDockables = CreateList<IDockable>(tool1),
+                Alignment = Alignment.Right
             };
 
             var leftDock = new ProportionalDock
@@ -61,9 +70,16 @@ namespace TestAvalonia2.ViewModels
                 Proportion = 0.25,
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>(
-                    leftTopToolDock,
-                    new ProportionalDockSplitter(),
-                    leftBottomToolDock
+                    leftTopToolDock
+                )
+            };
+            var rightDock = new ProportionalDock
+            {
+                Id = "RightDock",
+                Proportion = 0.25,
+                Orientation = Orientation.Vertical,
+                VisibleDockables = CreateList<IDockable>(
+                    rightTopToolDock
                 )
             };
 
@@ -73,7 +89,7 @@ namespace TestAvalonia2.ViewModels
                 Title = "Низ",
                 Proportion = 0.25,
                 ActiveDockable = tool3,
-                VisibleDockables = CreateList<IDockable>(tool3, tool4),
+                VisibleDockables = CreateList<IDockable>(tool3),
                 Alignment = Alignment.Bottom
             };
 
@@ -95,7 +111,9 @@ namespace TestAvalonia2.ViewModels
                 VisibleDockables = CreateList<IDockable>(
                     leftDock,
                     new ProportionalDockSplitter(),
-                    centerDock
+                    centerDock,
+                    new ProportionalDockSplitter(),
+                    rightDock
                 )
             };
 
@@ -122,7 +140,10 @@ namespace TestAvalonia2.ViewModels
                 ["Document1"] = () => new DemoDocument(),
                 ["Document2"] = () => new DemoDocument(),
                 ["Document3"] = () => new DemoDocument(),
-                ["Tool1"] = () => new Tool(),
+                ["Tool1"] = () => new DemoTool(),
+                ["Tool2"] = () => new DemoTool(),
+                ["Tool3"] = () => new DemoTool(),
+                ["Tool4"] = () => new DemoTool(),
                 ["Dashboard"] = () => layout
             };
 

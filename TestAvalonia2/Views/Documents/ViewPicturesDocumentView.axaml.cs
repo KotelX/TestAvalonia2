@@ -1,11 +1,12 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace TestAvalonia2.Views.Tools;
+namespace TestAvalonia2.Views.Documents;
 
-public partial class ToolView : UserControl
+public partial class ViewPicturesDocumentView : UserControl
 {
-    public ToolView()
+    public ViewPicturesDocumentView()
     {
         InitializeComponent();
     }

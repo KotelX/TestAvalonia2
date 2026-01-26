@@ -7,10 +7,74 @@
              xmlns:dock="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
              x:DataType="vm:MainWindowViewModel"
              x:Class="TestAvalonia2.Views.MainView">
-    
     <Design.DataContext>
         <vm:MainWindowViewModel />
     </Design.DataContext>
-    
-    <dock:DockControl Layout="{Binding Layout}" />
+	<UserControl.Resources>
+		<StreamGeometry x:Key="Save">
+			M37.1,4v13.6c0,1-0.8,1.9-1.9,1.9H13.9c-1,0-1.9-0.8-1.9-1.9V4H8C5.8,4,4,5.8,4,8v36c0,2.2,1.8,4,4,4h36c2.2,0,4-1.8,4-4V11.2L40.8,4H37.1z M44.1,42.1c0,1-0.8,1.9-1.9,1.9H9.9c-1,0-1.9-0.8-1.9-1.9V25.4c0-1,0.8-1.9,1.9-1.9h32.3c1,0,1.9,0.8,1.9,1.9V42.1z M24.8,13.6c0,1,0.8,1.9,1.9,1.9h4.6c1,0,1.9-0.8,1.9-1.9V4h-8.3L24.8,13.6L24.8,13.6z
+		</StreamGeometry>
+		<StreamGeometry x:Key="ImportIco">
+			M11,20H6a1,1,0,0,1-1-1V5A1,1,0,0,1,6,4h5V7a3,3,0,0,0,3,3h3v2a1,1,0,0,0,2,0V9s0,0,0-.06a1.31,1.31,0,0,0-.06-.27l0-.09a1.32,1.32,0,0,0-.19-.29h0l-6-6h0a1.32,1.32,0,0,0-.29-.19.32.32,0,0,0-.09,0L12.06,2H6A3,3,0,0,0,3,5V19a3,3,0,0,0,3,3h5a1,1,0,0,0,0-2ZM13,5.41,15.59,8H14a1,1,0,0,1-1-1ZM19,15H13.41l1.3-1.29a1,1,0,0,0-1.42-1.42l-3,3a1.15,1.15,0,0,0-.21.33,1,1,0,0,0,0,.76.93.93,0,0,0,.21.33l3,3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42L13.41,17H19a1,1,0,0,0,0-2Z
+		</StreamGeometry>
+		<StreamGeometry x:Key="ExportIco">
+			M20,24H0V0h14.41L20,5.59v4.38h-2V8h-6V2H2v20h18V24z M14,6h3.59L14,2.41V6z M18.71,20.71l-1.41-1.41L19.59,17H11v-2h8.59l-2.29-2.29l1.41-1.41L23.41,16L18.71,20.71z
+		</StreamGeometry>
+		<StreamGeometry x:Key="ZoommIco">
+			M19,25h12c0.6,0,1-0.4,1-1v-4c0-0.6-0.4-1-1-1H19 M19,19h-6c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h6 M49.6,45.3L38.1,33.8C40.5,30.5,42,26.4,42,22c0-11-9-20-20-20S2,11,2,22s9,20,20,20c4.4,0,8.5-1.5,11.8-3.9l11.5,11.5c0.6,0.6,1.5,0.6,2.1,0l2.1-2.1C50.1,46.9,50.1,45.9,49.6,45.3z M22,36c-7.7,0-14-6.3-14-14S14.3,8,22,8s14,6.3,14,14S29.7,36,22,36z
+		</StreamGeometry>
+		<StreamGeometry x:Key="ZoompIco">
+			M31,19h-6v-6c0-0.6-0.4-1-1-1h-4c-0.6,0-1,0.4-1,1v6h-6c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h6v6c0,0.6,0.4,1,1,1h4c0.6,0,1-0.4,1-1v-6h6c0.6,0,1-0.4,1-1v-4C32,19.4,31.6,19,31,19zM49.6,45.2L38.1,33.8C40.5,30.5,42,26.4,42,22c0-11-9-20-20-20S2,11,2,22s9,20,20,20c4.4,0,8.5-1.5,11.8-3.9l11.5,11.5c0.6,0.6,1.5,0.6,2.1,0l2.1-2.1C50.1,46.9,50.1,45.9,49.6,45.2z M22,36c-7.7,0-14-6.3-14-14S14.3,8,22,8s14,6.3,14,14S29.7,36,22,36z
+		</StreamGeometry>
+	</UserControl.Resources>
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+       <Panel Grid.Row="0" Margin="7">
+			<Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
+				  HorizontalAlignment="Stretch">
+				<Grid.Styles>
+					<Style Selector="Button">
+						<Setter Property="Margin" Value="3" />
+						<Setter Property="Padding" Value="4" />
+						<Setter Property="VerticalAlignment" Value="Stretch" />
+						<Setter Property="VerticalContentAlignment" Value="Center" />
+						<Setter Property="Background" Value="Transparent"/>
+					</Style>
+					<Style Selector="PathIcon">
+						<Setter Property="Width" Value="24" />
+						<Setter Property="Height" Value="24" />
+						<Setter Property="Opacity" Value="0.6" />
+					</Style>
+
+				</Grid.Styles>
+				<Button Grid.Column="0">
+					<PathIcon Data="{StaticResource Save}"/>
+				</Button>
+				<Border Grid.Column="1" Background="{DynamicResource ContainerForeground}" BorderThickness="2" CornerRadius="5">
+					<StackPanel Orientation="Horizontal">
+						<Button>
+							<PathIcon Data="{StaticResource ExportIco}"/>
+						</Button>
+						<Button>
+							<PathIcon Data="{StaticResource ImportIco}"/>
+						</Button>
+					</StackPanel>
+				</Border>
+				<Border Grid.Column="3" Background="{DynamicResource ContainerForeground}" BorderThickness="2" CornerRadius="5">
+					<StackPanel Orientation="Horizontal">
+						<Button>
+							<PathIcon Data="{StaticResource ZoommIco}"/>
+						</Button>
+						<Button>
+							<PathIcon Data="{StaticResource ZoompIco}"/>
+						</Button>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Panel>
+		<dock:DockControl Grid.Row="1" Layout="{Binding Layout}" />
+    </Grid>
 </UserControl>

@@ -8,7 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Include="Assets\Icons\*" />
+    <AvaloniaResource Include="Assets\*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +25,8 @@
     <PackageReference Include="Dock.Avalonia" Version="11.3.9" />
     <PackageReference Include="Dock.Avalonia.Themes.Fluent" Version="11.3.9" />
     <PackageReference Include="Dock.Model.Mvvm" Version="11.3.9" />
+    <PackageReference Include="NLog" Version="6.0.7" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="6.1.0" />
     <PackageReference Include="StaticViewLocator" Version="0.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -31,8 +34,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Documents\DocumentView.axaml.cs">
-      <DependentUpon>DocumentView.axaml</DependentUpon>
+    <AvaloniaResource Update="Assets\Icons\save.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Documents\ViewPicturesDocumentView.axaml.cs">
+      <DependentUpon>ViewPicturesDocumentView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Tools\ToolHistoryView.axaml.cs">
+      <DependentUpon>ToolHistoryView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Tools\ToolView.axaml.cs">
       <DependentUpon>ToolView.axaml</DependentUpon>
