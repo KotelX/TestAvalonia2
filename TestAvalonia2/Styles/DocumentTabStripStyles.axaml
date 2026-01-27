@@ -1,0 +1,11 @@
+<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Style Selector="DocumentTabStrip">
+		<Setter Property="IsVisible" Value="False"/>
+		<Setter Property="IsEnabled" Value="False"/>
+	</Style>
+	<Style Selector="Button#PART_MenuButton" >
+		<Setter Property="IsVisible" Value="false"/>
+		<!--Template для кнопки меню в тулах-->
+	</Style>
+</Styles>

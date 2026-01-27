@@ -30,5 +30,6 @@
 	<Application.Styles>
 		<FluentTheme />
 		<DockFluentTheme />
+		<StyleInclude Source="avares://TestAvalonia2/Styles/DocumentTabStripStyles.axaml"/>
 	</Application.Styles>
 </Application>

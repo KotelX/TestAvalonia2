@@ -31,7 +31,9 @@
 			M31,19h-6v-6c0-0.6-0.4-1-1-1h-4c-0.6,0-1,0.4-1,1v6h-6c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h6v6c0,0.6,0.4,1,1,1h4c0.6,0,1-0.4,1-1v-6h6c0.6,0,1-0.4,1-1v-4C32,19.4,31.6,19,31,19zM49.6,45.2L38.1,33.8C40.5,30.5,42,26.4,42,22c0-11-9-20-20-20S2,11,2,22s9,20,20,20c4.4,0,8.5-1.5,11.8-3.9l11.5,11.5c0.6,0.6,1.5,0.6,2.1,0l2.1-2.1C50.1,46.9,50.1,45.9,49.6,45.2z M22,36c-7.7,0-14-6.3-14-14S14.3,8,22,8s14,6.3,14,14S29.7,36,22,36z
 		</StreamGeometry>
 	</UserControl.Resources>
+	<UserControl.Styles>
 
+	</UserControl.Styles>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50" />
@@ -97,9 +99,9 @@
 					<ProportionalDockSplitter />
 					<!--Center-->
 					<ProportionalDock Orientation="Vertical">
-						<ProportionalDock>
+						<DocumentDock x:Name="te">
 							<vmViews:HomeViewModel/>
-						</ProportionalDock>
+						</DocumentDock>
 						<ProportionalDockSplitter/>
 						<ToolDock Proportion="0.2" Alignment="Bottom">
 							<vmTools:ToolViewModel CanClose="False" CanPin="False"/>
@@ -110,7 +112,7 @@
 					<!--Right-->
 					<ProportionalDock Proportion="0.25">
 						<ToolDock>
-							<vmTools:ToolViewModel/>
+							<vmTools:ToolViewModel CanClose="False" CanPin="False"/>
 						</ToolDock>
 					</ProportionalDock>
 

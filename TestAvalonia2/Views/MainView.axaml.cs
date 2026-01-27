@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Dock.Model.Avalonia.Controls;
 
 namespace TestAvalonia2.Views
 {
