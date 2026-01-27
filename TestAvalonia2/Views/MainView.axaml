@@ -1,15 +1,19 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:controls="using:Dock.Model.Mvvm.Controls"
+			 xmlns:controls="using:Dock.Model.Avalonia.Controls"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="using:TestAvalonia2.ViewModels"
+			 xmlns:vmTools="using:TestAvalonia2.ViewModels.Tools"
+			 xmlns:vmViews="using:TestAvalonia2.ViewModels.Views"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:DataType="vm:MainWindowViewModel"
 			 x:Class="TestAvalonia2.Views.MainView">
+
 	<Design.DataContext>
 		<vm:MainWindowViewModel />
 	</Design.DataContext>
+
 	<UserControl.Resources>
 		<StreamGeometry x:Key="Save">
 			M37.1,4v13.6c0,1-0.8,1.9-1.9,1.9H13.9c-1,0-1.9-0.8-1.9-1.9V4H8C5.8,4,4,5.8,4,8v36c0,2.2,1.8,4,4,4h36c2.2,0,4-1.8,4-4V11.2L40.8,4H37.1z M44.1,42.1c0,1-0.8,1.9-1.9,1.9H9.9c-1,0-1.9-0.8-1.9-1.9V25.4c0-1,0.8-1.9,1.9-1.9h32.3c1,0,1.9,0.8,1.9,1.9V42.1z M24.8,13.6c0,1,0.8,1.9,1.9,1.9h4.6c1,0,1.9-0.8,1.9-1.9V4h-8.3L24.8,13.6L24.8,13.6z
@@ -27,11 +31,13 @@
 			M31,19h-6v-6c0-0.6-0.4-1-1-1h-4c-0.6,0-1,0.4-1,1v6h-6c-0.6,0-1,0.4-1,1v4c0,0.6,0.4,1,1,1h6v6c0,0.6,0.4,1,1,1h4c0.6,0,1-0.4,1-1v-6h6c0.6,0,1-0.4,1-1v-4C32,19.4,31.6,19,31,19zM49.6,45.2L38.1,33.8C40.5,30.5,42,26.4,42,22c0-11-9-20-20-20S2,11,2,22s9,20,20,20c4.4,0,8.5-1.5,11.8-3.9l11.5,11.5c0.6,0.6,1.5,0.6,2.1,0l2.1-2.1C50.1,46.9,50.1,45.9,49.6,45.2z M22,36c-7.7,0-14-6.3-14-14S14.3,8,22,8s14,6.3,14,14S29.7,36,22,36z
 		</StreamGeometry>
 	</UserControl.Resources>
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
+
 		<Panel Grid.Row="0" Margin="7">
 			<Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
 				  HorizontalAlignment="Stretch">
@@ -48,7 +54,6 @@
 						<Setter Property="Height" Value="24" />
 						<Setter Property="Opacity" Value="0.6" />
 					</Style>
-
 				</Grid.Styles>
 				<Button Grid.Column="0">
 					<PathIcon Data="{StaticResource Save}"/>
@@ -75,6 +80,42 @@
 				</Border>
 			</Grid>
 		</Panel>
-		<DockControl Grid.Row="1" Layout="{Binding Layout}" />
+
+		<DockControl Grid.Row="1" InitializeLayout="True" InitializeFactory="True">
+			<DockControl.Factory>
+				<Factory HideToolsOnClose="True" HideDocumentsOnClose="True" />
+			</DockControl.Factory>
+			<RootDock IsCollapsable="False" DefaultDockable="{Binding #MainLayout}">
+				<ProportionalDock x:Name="MainLayout" Orientation="Horizontal">
+					<!--Left-->
+					<ProportionalDock Proportion="0.25">
+						<ToolDock>
+							<vmTools:ToolViewModel CanClose="False" CanPin="False"/>
+						</ToolDock>
+					</ProportionalDock>
+
+					<ProportionalDockSplitter />
+					<!--Center-->
+					<ProportionalDock Orientation="Vertical">
+						<ProportionalDock>
+							<vmViews:HomeViewModel/>
+						</ProportionalDock>
+						<ProportionalDockSplitter/>
+						<ToolDock Proportion="0.2" Alignment="Bottom">
+							<vmTools:ToolViewModel CanClose="False" CanPin="False"/>
+						</ToolDock>
+					</ProportionalDock>
+
+					<ProportionalDockSplitter/>
+					<!--Right-->
+					<ProportionalDock Proportion="0.25">
+						<ToolDock>
+							<vmTools:ToolViewModel/>
+						</ToolDock>
+					</ProportionalDock>
+
+				</ProportionalDock>
+			</RootDock>
+		</DockControl>
 	</Grid>
 </UserControl>

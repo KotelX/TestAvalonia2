@@ -9,6 +9,7 @@ namespace TestAvalonia2.Views
             InitializeComponent();
             InitializeThemes();
         }
+
         private void InitializeThemes()
         {
             bool dark = false;

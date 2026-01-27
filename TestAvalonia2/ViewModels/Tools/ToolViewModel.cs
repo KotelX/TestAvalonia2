@@ -1,11 +1,8 @@
-﻿using Dock.Model.Mvvm.Controls;
+﻿using Dock.Model.Avalonia.Controls;
 
 namespace TestAvalonia2.ViewModels.Tools
 {
     internal class ToolViewModel : Tool
     {
-        public ToolViewModel()
-        {
-        }
     }
 }

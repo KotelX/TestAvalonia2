@@ -2,13 +2,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 x:Class="TestAvalonia2.App"
 			 xmlns:local="using:TestAvalonia2"
-			 xmlns:core="using:Dock.Model.Core"
 			 RequestedThemeVariant="Default">
-
-	<Application.DataTemplates>
-		<local:ViewLocator />
-	</Application.DataTemplates>
-
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -18,25 +12,11 @@
 				<ResourceDictionary>
 					<ResourceDictionary.ThemeDictionaries>
 						<ResourceDictionary x:Key='Default'>
-							<SolidColorBrush x:Key="TextControlBackground">#EFEFEF</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBackgroundFocused">#EFEFEF</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBackgroundPointerOver">#EFEFEF</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlForeground">#212121</SolidColorBrush>
-							<SolidColorBrush x:Key="TextForegroundColor">#212121</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBorderBrush">#33323232</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBorderBrushPointerOver">#33323232</SolidColorBrush>
 							<SolidColorBrush x:Key="ContainerForeground">#33323232</SolidColorBrush>
 							<Color x:Key="RegionColor">#FFFAFAFA</Color>
 							<Color x:Key="AcrylicFallbackColor">#E2E2E2</Color>
 						</ResourceDictionary>
 						<ResourceDictionary x:Key='Dark'>
-							<SolidColorBrush x:Key="TextControlBackground">#2F2F2F</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBackgroundFocused">#2F2F2F</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBackgroundPointerOver">#2F2F2F</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlForeground">#FFFFFF</SolidColorBrush>
-							<SolidColorBrush x:Key="TextForegroundColor">#FFFFFF</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBorderBrush">#434343</SolidColorBrush>
-							<SolidColorBrush x:Key="TextControlBorderBrushPointerOver">#434343</SolidColorBrush>
 							<SolidColorBrush x:Key="ContainerForeground">#212121</SolidColorBrush>
 							<Color x:Key="RegionColor">#FF212121</Color>
 							<Color x:Key="AcrylicFallbackColor">#1F1F1F</Color>
@@ -50,9 +30,5 @@
 	<Application.Styles>
 		<FluentTheme />
 		<DockFluentTheme />
-
-		<Style Selector="DockControl">
-			<Setter Property="(ControlRecyclingDataTemplate.ControlRecycling)" Value="{StaticResource ControlRecyclingKey}" />
-		</Style>
 	</Application.Styles>
 </Application>
