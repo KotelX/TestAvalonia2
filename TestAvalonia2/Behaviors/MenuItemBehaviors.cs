@@ -34,7 +34,7 @@ namespace TestAvalonia2.Behaviors
         {
             if (sender is MenuItem menuItem)
             {
-                var command = GetClickCommand(menuItem);
+                ICommand command = GetClickCommand(menuItem);
                 if (command?.CanExecute(menuItem.CommandParameter) == true)
                     command.Execute(menuItem.CommandParameter);
             }

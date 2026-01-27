@@ -8,12 +8,5 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:Tools.ToolViewModel"
              x:Class="TestAvalonia2.Views.Tools.ToolView" x:CompileBindings="True">
-  <Grid>
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-      <TextBlock Text="{Binding Id}" Padding="2" />
-      <TextBlock Text="{Binding Title}" Padding="2" />
-      <TextBlock Text="{Binding Context}" Padding="2" />
-      <TextBox Text="Tool1" />
-    </StackPanel>
-  </Grid>
+
 </UserControl>

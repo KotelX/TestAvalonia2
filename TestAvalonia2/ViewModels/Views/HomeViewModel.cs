@@ -2,7 +2,7 @@
 
 namespace TestAvalonia2.ViewModels.Views
 {
-    public class HomeViewModel :RootDock
+    public class HomeViewModel : Document
     {
     }
 }

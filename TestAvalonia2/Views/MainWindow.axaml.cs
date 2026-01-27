@@ -11,7 +11,7 @@ namespace TestAvalonia2.Views
         }
         private void InitializeThemes()
         {
-            var dark = false;
+            bool dark = false;
 
             if (ThemeButton is not null)
             {

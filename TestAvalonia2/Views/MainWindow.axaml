@@ -36,7 +36,6 @@
 									 MaterialOpacity="0.3"
 									 x:Key="AcrylicMaterial2"/>
 	</Window.Resources>
-
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"/>
@@ -69,7 +68,6 @@
 						<PathIcon Width="16" Height="16" Opacity="0.6" Data="{StaticResource Login}"/>
 					</Button>
 				</StackPanel>
-
 			</Grid>
 		</Panel>
 		<views:MainView Grid.Row="1"/>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestAvalonia2
+namespace TestAvalonia2.Services
 {
     public interface IEventAggregator
     {

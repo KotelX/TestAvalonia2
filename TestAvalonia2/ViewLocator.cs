@@ -1,11 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Dock.Model.Core;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using TestAvalonia2.ViewModels;
 using StaticViewLocator;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TestAvalonia2
 {
@@ -23,8 +21,8 @@ namespace TestAvalonia2
             if (param is null)
                 return null;
 
-            var name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
-            var type = Type.GetType(name);
+            string? name = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.Ordinal);
+            Type? type = Type.GetType(name);
 
             if (type != null)
             {
@@ -41,7 +39,7 @@ namespace TestAvalonia2
                 return false;
             }
 
-            var type = data.GetType();
+            Type? type = data.GetType();
             return data is IDockable || s_views.ContainsKey(type);
         }
     }

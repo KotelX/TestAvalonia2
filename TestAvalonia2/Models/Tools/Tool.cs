@@ -1,6 +1,6 @@
 ﻿namespace TestAvalonia2.Models.Tools
 {
-    internal class DemoTool
+    internal class Tool
     {
     }
 }

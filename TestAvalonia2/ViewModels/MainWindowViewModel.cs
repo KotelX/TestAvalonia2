@@ -15,31 +15,17 @@ namespace TestAvalonia2.ViewModels
         {
             _factory = new DockFactory();
 
-            var layout = _factory?.CreateLayout();
-            if (layout is not null)
+            _layout = _factory?.CreateLayout();
+            if (_layout is not null)
             {
-                _factory?.InitLayout(layout);
+                _factory?.InitLayout(_layout);
             }
-            Layout = layout;
         }
 
         [RelayCommand]
         private void RestoreLayout(object item)
         {
-            if (Layout is not null)
-            {
-                if (Layout.Close.CanExecute(null))
-                {
-                    Layout.Close.Execute(null);
-                }
-            }
-
-            var layout = _factory?.CreateLayout();
-            if (layout is not null)
-            {
-                _factory?.InitLayout(layout);
-                Layout = layout;
-            }
+;
         }
     }
 }

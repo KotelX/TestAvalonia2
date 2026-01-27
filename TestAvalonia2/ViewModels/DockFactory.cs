@@ -5,106 +5,90 @@ using Dock.Model.Mvvm;
 using Dock.Model.Mvvm.Controls;
 using System;
 using System.Collections.Generic;
-using TestAvalonia2.Models.Documents;
-using TestAvalonia2.Models.Tools;
 using TestAvalonia2.Services;
-using TestAvalonia2.ViewModels.Docks;
-using TestAvalonia2.ViewModels.Documents;
 using TestAvalonia2.ViewModels.Tools;
+using TestAvalonia2.ViewModels.Views;
 
 namespace TestAvalonia2.ViewModels
 {
     public class DockFactory : Factory
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IFileLogger _fileLogger;
         private IRootDock? _rootDock;
-        private IDocumentDock? _documentDock;
+        private IProportionalDock? _documentDock;
 
         public DockFactory()
         {
             _eventAggregator = new EventAggregator();
-            _fileLogger = new FileLogger();
         }
 
         public override IRootDock CreateLayout()
         {
-            var document1 = new ViewPicturesDocumentViewModel(_eventAggregator, _fileLogger) { Id = "D1", Title = "Document1" };
-            var document2 = new DocumentViewModel() { Id = "D2", Title = "Document2" };
-            var document3 = new DocumentViewModel() { Id = "D3", Title = "Document3" };
-            var tool1 = new ToolViewModel() { Id = "T1", Title = "Tool1" };
-            var tool2 = new ToolViewModel() { Id = "T2", Title = "Tool2" };
-            var tool3 = new ToolHistoryViewModel(_eventAggregator, _fileLogger) { Id = "T3", Title = "Tool3" };
-            var tool4 = new ToolMenuViewModel(_eventAggregator) { Id = "T4", Title = "Tool4" };
-            var tool5 = new ToolViewModel() { Id = "T5", Title = "Tool5" };
-            var documentDock = new CustomDocumentDock(_eventAggregator, _fileLogger)
-            {
-                Title = "Doc",
-                IsCollapsable = false,
-                ActiveDockable = document1,
-                VisibleDockables = CreateList<IDockable>(document1, document2, document3),
-                CanCreateDocument = true,
-                EnableWindowDrag = true
-            };
+            Document home = new HomeViewModel() { Id = "HomeVM" };
+            Tool tool1 = new ToolViewModel() { Id = "T1", CanClose = false, CanPin = false };
+            Tool tool2 = new ToolViewModel() { Id = "T2", CanClose = false, CanPin = false };
+            Tool tool3 = new ToolViewModel() { Id = "T3", CanClose = false, CanPin = false };
 
-            var leftTopToolDock = new ToolDock
+            ToolDock leftToolDock = new ToolDock
             {
-                Id = "LeftTopTools",
-                Title = "Верх",
-                ActiveDockable = tool4,
-                VisibleDockables = CreateList<IDockable>(tool4),
+                Id = "LeftTools",
+                ActiveDockable = tool1,
+                VisibleDockables = CreateList<IDockable>(tool1),
                 Alignment = Alignment.Left
             };
-            var rightTopToolDock = new ToolDock
+            ToolDock rightToolDock = new ToolDock
             {
-                Id = "RightTopTools",
-                Title = "Верх",
-                ActiveDockable = tool5,
-                VisibleDockables = CreateList<IDockable>(tool1),
-                Alignment = Alignment.Right
-            };
-
-            var leftDock = new ProportionalDock
-            {
-                Id = "LeftDock",
+                Id = "RightTools",
                 Proportion = 0.25,
-                Orientation = Orientation.Vertical,
-                VisibleDockables = CreateList<IDockable>(
-                    leftTopToolDock
-                )
+                ActiveDockable = tool2,
+                VisibleDockables = CreateList<IDockable>(tool2),
+                Alignment = Alignment.Right,
             };
-            var rightDock = new ProportionalDock
-            {
-                Id = "RightDock",
-                Proportion = 0.25,
-                Orientation = Orientation.Vertical,
-                VisibleDockables = CreateList<IDockable>(
-                    rightTopToolDock
-                )
-            };
-
-            var bottomToolDock = new ToolDock
+            ToolDock bottomToolDock = new ToolDock
             {
                 Id = "BottomTools",
-                Title = "Низ",
                 Proportion = 0.25,
                 ActiveDockable = tool3,
                 VisibleDockables = CreateList<IDockable>(tool3),
                 Alignment = Alignment.Bottom
             };
+            ProportionalDock HomeDock = new ProportionalDock()
+            {
+                Id = "Home",
+                ActiveDockable = home,
+                VisibleDockables = CreateList<IDockable>(home)
+            };
 
-            var centerDock = new ProportionalDock
+            ProportionalDock leftDock = new ProportionalDock
+            {
+                Id = "LeftDock",
+                Proportion = 0.25,
+                Orientation = Orientation.Vertical,
+                VisibleDockables = CreateList<IDockable>(
+                    leftToolDock
+                )
+            };
+            ProportionalDock rightDock = new ProportionalDock
+            {
+                Id = "RightDock",
+                Proportion = 0.25,
+                Orientation = Orientation.Vertical,
+                VisibleDockables = CreateList<IDockable>(
+                    rightToolDock
+                )
+            };
+            ProportionalDock centerDock = new ProportionalDock
             {
                 Id = "CenterDock",
                 Orientation = Orientation.Vertical,
                 VisibleDockables = CreateList<IDockable>(
-                    documentDock,
+                    HomeDock,
                     new ProportionalDockSplitter(),
                     bottomToolDock
                 )
             };
 
-            var mainLayout = new ProportionalDock
+            ProportionalDock mainLayout = new ProportionalDock
             {
                 Id = "MainLayout",
                 Orientation = Orientation.Horizontal,
@@ -113,23 +97,21 @@ namespace TestAvalonia2.ViewModels
                     new ProportionalDockSplitter(),
                     centerDock,
                     new ProportionalDockSplitter(),
-                    rightDock
+                    rightToolDock
                 )
             };
 
-            var rootDock = new RootDock
+            RootDock rootDock = new RootDock
             {
                 Id = "Root",
-                Title = "Root",
                 IsCollapsable = false,
                 ActiveDockable = mainLayout,
                 DefaultDockable = mainLayout,
                 VisibleDockables = CreateList<IDockable>(mainLayout)
             };
 
-            _documentDock = documentDock;
+            _documentDock = HomeDock;
             _rootDock = rootDock;
-
             return rootDock;
         }
 
@@ -137,14 +119,10 @@ namespace TestAvalonia2.ViewModels
         {
             ContextLocator = new Dictionary<string, Func<object?>>
             {
-                ["Document1"] = () => new DemoDocument(),
-                ["Document2"] = () => new DemoDocument(),
-                ["Document3"] = () => new DemoDocument(),
-                ["Tool1"] = () => new DemoTool(),
-                ["Tool2"] = () => new DemoTool(),
-                ["Tool3"] = () => new DemoTool(),
-                ["Tool4"] = () => new DemoTool(),
-                ["Dashboard"] = () => layout
+                ["HomeVM"] = () => new HomeViewModel(),
+                ["T1"] = () => new ToolViewModel(),
+                ["T2"] = () => new ToolViewModel(),
+                ["T3"] = () => new ToolViewModel()
             };
 
             DockableLocator = new Dictionary<string, Func<IDockable?>>()
