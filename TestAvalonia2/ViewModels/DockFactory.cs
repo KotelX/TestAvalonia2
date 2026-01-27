@@ -3,7 +3,6 @@ using Dock.Model.Controls;
 using Dock.Model.Core;
 using Dock.Model.Mvvm;
 using Dock.Model.Mvvm.Controls;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using TestAvalonia2.Models.Documents;
